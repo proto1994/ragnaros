@@ -1,48 +1,49 @@
-/**
- *  栈 先进后出
- *  Push Pop
- * var stack = new Stack();
- * stack.push(5)
- * stack: [5]
- * stack.pop()
- * stack: []
- */
 
-class Stack {
+/**
+ * 队列先进先出
+ */
+class Queue {
   constructor() {
     this.items = {};
     this.count = 0;
+    this.lowestCount = 0;
   }
+
   push(item) {
     this.items[this.count] = item;
     this.count++;
   }
-  
+
+  /**
+   * {
+   *  0: 1
+   *  1: 2
+   * }
+   */
   pop() {
     if (this.count <= 0) return;
-    this.count--;
-    const last = this.items[this.count];
-    delete this.items[this.count];
-    return last;
+    const front = this.items[this.lowestCount];
+    delete this.items[this.lowestCount];
+    this.lowestCount++;
+    return front;
   }
 
-  // 末尾
-  peek() {
-    if (this.count < 0) return null;
-    return this.items[this.count - 1];
+  front() {
+    return this.items[this.lowestCount];
   }
 
   size() {
     return this.count;
   }
 
+  isEmpty() {
+    return this.count === 0;
+  }
+
   clear() {
     this.items = {};
     this.count = 0;
-  }
-
-  isEmpty() {
-    return this.count === 0;
+    this.lowestCount = 0;
   }
 
   toString() {
@@ -55,8 +56,7 @@ class Stack {
     }
     return result;
   }
+
 }
-module.exports = Stack;
 
-
-
+module.exports = Queue;
