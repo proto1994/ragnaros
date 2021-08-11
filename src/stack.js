@@ -16,16 +16,16 @@ class Stack {
   }
   pop() {
     if (this.count <= 0) return;
+    this.count--;
     const last = this.items[this.count];
     delete this.items[this.count];
-    this.count--;
     return last;
   }
 
   // 末尾
   peek() {
     if (this.count < 0) return null;
-    return this.items[this.count];
+    return this.items[this.count - 1];
   }
 
   size() {
@@ -42,7 +42,14 @@ class Stack {
   }
 
   toString() {
-
+    if (this.isEmpty()) {
+      return '';
+    }
+    let result = `${this.items[0]}`;
+    for (let i = 1; i < this.count; i++) {
+      result = `${result},${this.items[i]}`;
+    }
+    return result;
   }
 }
 module.exports = Stack;
