@@ -1,49 +1,53 @@
 class Dqueue {
   constructor() {
     this.items = {};
-    this.count = 0;
-    this.lowestCount = 0;
+    this.tailIndex = 0; // 尾部下标
+    this.frontIndex = 0; // 头部下标
   }
 
-  push(item) {
-    this.items[count] = item;
-    this.count++;
+  addTail(item) {
+    this.items[this.tailIndex] = item;
+    this.tailIndex++;
   }
 
   addFront(item) {
-    this.lowestCount--;
-    this.items[this.lowestCount] = item;
-    this.count++;
+    this.frontIndex--;
+    this.items[this.frontIndex] = item;
   }
 
+  removeTail() {
+    const tail = this.items[this.tailIndex];
+    this.tailIndex--;
+    return tail;
+  }
+
+
   removeFront() {
-    const front = this.items[this.lowestCount];
-    this.lowestCount++;
-    this.count--;
+    const front = this.items[this.frontIndex];
+    this.frontIndex++;
     return front;
   }
 
-
   size() {
-    return this.count;
+    return this.tailIndex - this.frontIndex;
   }
 
   isEmpty() {
-    return this.count === 0;
+    return this.size() === 0;
   }
 
   clear() {
     this.items = {};
-    this.count = 0;
-    this.lowestCount = 0;
+    this.tailIndex = 0; // 尾部下标
+    this.frontIndex = 0; // 头部下标
   }
 
   toString() {
     if (this.isEmpty()) {
       return '';
     }
-    let result = `${this.items[0]}`;
-    for (let i = 1; i < this.count; i++) {
+    let result = `${this.items[this.frontIndex]}`;
+    for (let i = this.frontIndex + 1; i < this.tailIndex; i++) {
       result = `${result},${this.items[i]}`;
     }
     return result;
@@ -51,6 +55,5 @@ class Dqueue {
 
 
 } 
-
 
 module.exports = Dqueue;

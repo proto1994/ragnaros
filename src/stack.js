@@ -26,7 +26,6 @@ class Stack {
     return last;
   }
 
-  // 末尾
   peek() {
     if (this.count < 0) return null;
     return this.items[this.count - 1];
