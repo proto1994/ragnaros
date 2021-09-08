@@ -88,11 +88,24 @@ class BinarySearchTree {
   }
 
   min() {
-
+    return this.minNode(this.root);
   }
-
+  minNode(node) {
+    if (!node) return null;
+    while(node.left) {
+      node = node.left;
+    }
+    return node.key;
+  }
   max() {
-
+    return this.maxNode(this.root);
+  }
+  maxNode(node) {
+    if (!node) return null;
+    while(node.right) {
+      node = node.right;
+    }
+    return node.key;
   }
 
   remove(key) {

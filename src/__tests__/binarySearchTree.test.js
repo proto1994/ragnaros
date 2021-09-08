@@ -87,7 +87,30 @@ describe('BinarySearchTree测试', () => {
       postOrderTraverseArr.push(key);
     });
     expect(postOrderTraverseArr).toEqual([3, 6, 5, 11, 9, 8]);
+  })
 
+  test('测试BinarySearchTree min函数', () => {
+    const binarySearchTree = new BinarySearchTree();
+    expect(binarySearchTree.min()).toBe(null);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(11);
+    expect(binarySearchTree.min()).toBe(3);
+  })
+
+  test('测试BinarySearchTree max函数', () => {
+    const binarySearchTree = new BinarySearchTree();
+    expect(binarySearchTree.max()).toBe(null);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(11);
+    expect(binarySearchTree.max()).toBe(11);
   })
 
 
