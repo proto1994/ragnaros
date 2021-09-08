@@ -98,7 +98,7 @@ describe('BinarySearchTree测试', () => {
     binarySearchTree.insert(6);
     binarySearchTree.insert(9);
     binarySearchTree.insert(11);
-    expect(binarySearchTree.min()).toBe(3);
+    expect(binarySearchTree.min().key).toBe(3);
   })
 
   test('测试BinarySearchTree max函数', () => {
@@ -110,7 +110,63 @@ describe('BinarySearchTree测试', () => {
     binarySearchTree.insert(6);
     binarySearchTree.insert(9);
     binarySearchTree.insert(11);
-    expect(binarySearchTree.max()).toBe(11);
+    expect(binarySearchTree.max().key).toBe(11);
+  })
+
+  test('测试BinarySearchTree remove 叶子结点', () => {
+    const binarySearchTree = new BinarySearchTree();
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(11);
+    binarySearchTree.remove(3);
+
+    // 中序遍历
+    const inOrderTraverseArr = [];
+    binarySearchTree.inOrderTraverse((key) => {
+      inOrderTraverseArr.push(key);
+    });
+    expect(inOrderTraverseArr).toEqual([5, 6, 8, 9, 11]);
+   
+  })
+
+  test('测试BinarySearchTree remove 单个子节点', () => {
+    const binarySearchTree = new BinarySearchTree();
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(11);
+    binarySearchTree.remove(9);
+    binarySearchTree.remove(5);
+
+    // 中序遍历
+    const inOrderTraverseArr = [];
+    binarySearchTree.inOrderTraverse((key) => {
+      inOrderTraverseArr.push(key);
+    });
+    expect(inOrderTraverseArr).toEqual([3, 8, 11]);
+  })
+
+  test('测试BinarySearchTree remove 多个子节点', () => {
+    const binarySearchTree = new BinarySearchTree();
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(9);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(11);
+    binarySearchTree.remove(5);
+
+     // 中序遍历
+     const inOrderTraverseArr = [];
+     binarySearchTree.inOrderTraverse((key) => {
+       inOrderTraverseArr.push(key);
+     });
+     expect(inOrderTraverseArr).toEqual([3, 6, 7, 8, 9, 11]);
   })
 
 

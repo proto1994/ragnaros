@@ -95,7 +95,7 @@ class BinarySearchTree {
     while(node.left) {
       node = node.left;
     }
-    return node.key;
+    return node;
   }
   max() {
     return this.maxNode(this.root);
@@ -105,13 +105,38 @@ class BinarySearchTree {
     while(node.right) {
       node = node.right;
     }
-    return node.key;
+    return node;
   }
 
   remove(key) {
-
+    this.removeNode(this.root, key);
   }
 
+  removeNode(node, key) {
+    if (!node) return null;
+    // 向左查找
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.removeNode(node.left, key);
+      return node;
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
+      node.right = this.removeNode(node.right, key);
+      return node;
+    } else {
+      if (node.left === null && node.right === null) {
+        return null;
+      }
+      if (node.left === null) {
+        return node.right;
+      } else if (node.right == null) {
+        return node.left;
+      }
+      const minRightNode = this.minNode(node.right);
+      this.removeNode(node, minRightNode.key);
+      node.key = minRightNode.key;
+      return node;
+    }
+
+  }
 
  }
 
