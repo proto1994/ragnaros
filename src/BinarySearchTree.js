@@ -138,6 +138,10 @@ class BinarySearchTree {
 
   }
 
+  toString() {
+    
+  }
+
  }
 
  module.exports = BinarySearchTree;
