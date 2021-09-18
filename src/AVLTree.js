@@ -87,6 +87,8 @@ class AVLTree extends BinarySearch {
     } else {
       this.root = this.insertNode(this.root, key);
     }
+
+    // console.log('root: ', this.root);
   }
 
   insertNode(node, key) {
@@ -115,15 +117,13 @@ class AVLTree extends BinarySearch {
     }
     return node;
   }
-
   remove(key) {
     this.removeNode(this.root, key);
   }
-
-  removeNode() {
-    
+  removeNode(node, key) {
+    const tempNode = super.removeNode(node, key);
+    return tempNode;
   }
-  
 
 }
 

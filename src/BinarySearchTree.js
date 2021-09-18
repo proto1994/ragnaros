@@ -131,17 +131,11 @@ class BinarySearchTree {
         return node.left;
       }
       const minRightNode = this.minNode(node.right);
-      this.removeNode(node, minRightNode.key);
-      node.key = minRightNode.key;
-      return node;
+      let tempNode = this.removeNode(node, minRightNode.key);
+      tempNode.key = minRightNode.key;
+      return tempNode;
     }
-
   }
-
-  toString() {
-    
-  }
-
  }
 
  module.exports = BinarySearchTree;
