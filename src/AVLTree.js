@@ -118,11 +118,31 @@ class AVLTree extends BinarySearch {
     return node;
   }
   remove(key) {
-    this.removeNode(this.root, key);
+    this.root = this.removeNode(this.root, key);
   }
   removeNode(node, key) {
-    const tempNode = super.removeNode(node, key);
-    return tempNode;
+    node = super.removeNode(node, key);
+    if (!node) return node;
+    const balanceFactor = this.getBalanceFactor(node);
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      const balanceFactorLeft = this.getBalanceFactor(node.left);
+      if ([BalanceFactor.BALANCED, BalanceFactor.SLIGHTLY_UNBALANCED_LEFT].includes(balanceFactorLeft)) {
+        node = this.rotateLL(node);
+      }
+      if (BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT === balanceFactorLeft) {
+        node = this.rotateLR(node.left);
+      }
+    }
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      const balanceFactorRight = this.getBalanceFactor(node.right);
+      if ([BalanceFactor.BALANCED, BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT].includes(balanceFactorRight)) {
+        node = this.rotateRR(node);
+      }
+      if (BalanceFactor.SLIGHTLY_UNBALANCED_LEFT === balanceFactorLeft) {
+        node = this.rotateLR(node.right);
+      }
+    }
+    return node;
   }
 
 }
